@@ -1,0 +1,36 @@
+Blaga Ana-Maria-Andreea, 314CB
+
+Structuri:
+
+-pixel: pentru un element din matricea de pixeli in care este pastrata imaginea. Are trei componente: red, green, blue.
+-elem: pentru indicii de linie si de coloana ai unui element din matricea de pixeli(folosita la task-ul 5).
+
+Functii:
+
+-Functia "alloc_bitmap_matrix" este folosita pentru alocarea de memorie pentru o matrice de pixeli. In cazul in care nu se reuseste alocarea se returneaza "NULL", iar in caz contrar este returnata matricea de pixeli alocata.
+
+-Functia "free_bitmap_matrix" este folosita pentru a elibera memoria alocata pentru o matrice de pixeli.
+
+-Functia "load" este folosita pentru a citi componenetele unei imagini bitmap dintr-un fisier binar, respectiv file header-ul, info header-ul si matricea de pixel de tipul pixel(avand trei componenete pentru fiecare pixel:red,green si blue). Pentru a aloca memorie pentru matricea de pixeli este folosita functia "alloc_bitmap_matrix". Imaginea este citita de jos in sus(respectiv prma linie din matricea de pixeli este ultima linie din fisierul binar). Padding-ul este ignorat folosiund functia "fseek".
+
+-Functia "print" este folosita pentru a scrie intr-un fisier binar componentele unei imagini bitmap, respectiv file header-ul, info header-ul si matricea de pixeli. In cazul in care imaginea are padding acesta va consta in scrierea repetata a valorii 0.
+
+-Functia "black_and_white" este folosita pentru a transforma o imagine bitmap intr-o imagine bitmap alb-negru. Se face media aritmetica a componetelor red, green si blue a fiecarui pixel si apoi toate aceste componente primesc valoarea calculata.
+
+-Functia "maximum" returneaza valoarea maxima dintre doua valori primite ca parameteri.
+
+-Functia "minimum" returneaza valoarea minima dintre doua valori primite ca parameteri.
+
+-Functia "no_crop" este folosita pentru a transforma o imagine bitmap "nepatratica" in una "patratica". Se va obtine o imagine bitmap cu chenar alb avand ca dimensiuni(width si height) valoarea maxima dintre acestea doua.
+
+-Functia "convolutional_layer" este folosita pentru a aplica un filtru de tip matrice patratica unei imagini bitmap. Fiecare pixel se obtine centrandu-l pe acesta in  matrice si va primi suma produselor dintre pixelii vecini si elementele din matrice, inclusiv el insusi. In cazul in care nu are unul/mai multi vecini produsul/produsele corespunzatoare vor fi egale cu 0.
+
+-Functia "pooling" este folosita pentru a aplica un filtru de min/max pooling unei matrice de pixeli. Se poate alege daca se doreste min sau max. Daca se alege max fiecare pixel va primi valoarea maxima dintr-o zona de pixeli determinata de valoarea filtrului de pooling. Analog pentru min.
+
+-Functia "pixel_is_free_and_in_matrix" determina daca un pixel se afla intr-o matrice de pixeli si daca acesta nu a fost deja inclus intr-o alta zona in cadrul task-ului de clustering.
+
+-Functia "determinare_zona" este folosita pentru a determina pixelii dintr-o zona de clustering. Coordonatele acestora sunt pastrate intr-un vector de tip "elem". Pixelii se obtin folosind doi vectori de deplasare(pe linie si pe coloana). In cazul in care acestia sunt din matrice si suma modulelor diferentelor pe componente dintre pixelul de la care s-a pornit determinarea zonei de clustering si pixelul actual este mai mica sau egala cu o valoare de threshold. In final fiecare componenta a unui pixel din zona primeste media aritmetica a componentei respective a tuturor pixelilor din zona.
+
+-Functia "clustering" este folosita pentru a determina primul pixel dintr-o zona de clustering, ulterior fiind apelata funtia "determinare_zona" pentru a se realiza rocedeul respectiv.
+
+In "main":apelez functiile necesare realizarii task-urilor(+deschis/inchis fisiere,verificat alocari si deschideri etc.).
